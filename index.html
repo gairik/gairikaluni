@@ -531,14 +531,19 @@
     <script src="js/now-ui-kit.js?v=1.1.0"></script>
     <script src="js/aos.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="js/core/jquery.3.2.1.min.js"></script>
+
 
     <br>
-    <form action="file:///home/gairik/Desktop/creative-cv_free_1-0-2/index.html" onsubmit="addGeocodedMarker()">
-      Enter Address: <input type="text" name="address"><br>
+    <!-- <form onsubmit="addGeocodedMarker()">
+      Enter Address: <input type="text" id="address"><br>
       <input type="submit">
-    </form>
+    </form> -->
 
-    
+     <h5> Enter Address: </h5> <input type="text" id="address"><br>  
+      <div onclick=" addGeocodedMarker()" class="btn btn-primary" style="animation: pulsate 1.6s ease-out">Click</div>
+
+
     <div id="mapContainer" style="width: 100vw; height: 600px; background: white; margin-left: auto; margin-right: auto;"></div>
     
 
@@ -587,7 +592,7 @@
         displayMap();
 
         function addStaticMarker() {
-        let americaMarker = new H.map.Marker({lat:52.5160,lng:13.3779});
+        let americaMarker = new H.map.Marker({lat:M.Lat,lng:M.Lng});
         M.Map.addObject(americaMarker);
     }
 
@@ -595,10 +600,13 @@
      
 
       // Adding marker to entered address
-      function addGeocodedMarker(){
-       var formdata = document.getElementById("address").value;
+      
+     function addGeocodedMarker(){
+      var searchtext_box= $("#address").val();
+
         M.Geo.geocode(
-            {searchText: formdata}, 
+            {
+              searchText: searchtext_box}, 
             function(r) {
                 let first = r.Response.View[0].Result[0].Location.DisplayPosition;
                 console.log(first);
@@ -614,9 +622,11 @@
         );
     }
 
-   // addGeocodedMarker();
+    addGeocodedMarker();
+
 
         
     </script>
+    
   </body>
 </html>
